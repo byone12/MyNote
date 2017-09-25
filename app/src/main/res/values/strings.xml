@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Note</string>
+    <string name="all_notes">全部笔记</string>
+    <string name="search_note">搜索标题</string>
+    <string name="setting">设置</string>
+    <string name="modify_note">确定</string>
+    <string name="add_note">添加笔记</string>
+    <string name="searchNote">搜索</string>
+</resources>
