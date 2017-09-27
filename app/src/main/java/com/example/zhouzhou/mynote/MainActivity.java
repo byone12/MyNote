@@ -178,7 +178,7 @@ Intent intent=new Intent(this,Kube.class);
         BmobUser.logOut(this);
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
-        //finish();
+        finish();
     }
 
     /**

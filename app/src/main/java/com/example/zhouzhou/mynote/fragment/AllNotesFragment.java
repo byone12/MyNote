@@ -154,9 +154,6 @@ public class AllNotesFragment extends Fragment implements AdapterView.OnItemClic
         Cursor c = (Cursor) mAdapter.getItem(position); // CursorAdapter中getItem()返回特定的cursor对象
         int itemID = c.getInt(c.getColumnIndex("_id"));
         switch (item.getOrder()) {
-            case CONTEXT_UPDATE_ORDER: // 更新操作
-                //Toast.makeText(getActivity(),"UPDATE",Toast.LENGTH_SHORT).show();
-                break;
             case CONTEXT_DELETE_ORDER: // 删除操作
                 //Toast.makeText(getActivity(),"DELETE",Toast.LENGTH_SHORT).show();
                 mNoteDAO.deleteNote("_id=?", new String[]{itemID + ""});
@@ -173,7 +170,6 @@ public class AllNotesFragment extends Fragment implements AdapterView.OnItemClic
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle("请选择:");
-        menu.add(0, v.getId(), CONTEXT_UPDATE_ORDER, "修改");
         menu.add(0, v.getId(), CONTEXT_DELETE_ORDER, "删除");
     }
 
@@ -213,6 +209,14 @@ public class AllNotesFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onRefresh() {
         Toast.makeText(getActivity(), "下拉刷新", Toast.LENGTH_SHORT).show();
+        BmobUser user=BmobUser.getCurrentUser(getActivity());
+        if(user==null){
+            Toast.makeText(getActivity(), "您没有登录,请先登录", Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+            return;
+        }
         final Uri uri = Uri.parse("content://com.example.zhouzhou.mynote.noteprovider/notes");
         Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
         if (cursor != null) {
@@ -243,13 +247,6 @@ public class AllNotesFragment extends Fragment implements AdapterView.OnItemClic
                     // 向服务器下载本机没有的数据
                     BmobQuery<Note> bmobQuery = new BmobQuery<>();
                     BmobUser user=BmobUser.getCurrentUser(getActivity());
-                    if(user==null){
-                        Toast.makeText(getActivity(), "您没有登录,请先登录", Toast.LENGTH_SHORT).show();
-                                Intent intent=new Intent(getActivity(), LoginActivity.class);
-                                startActivity(intent);
-                                getActivity().finish();
-                        return;
-                    }
                     String userName=user.getUsername();
                     bmobQuery.addWhereEqualTo("userName", userName);
                     bmobQuery.setLimit(50); // 返回50条数据

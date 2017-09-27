@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2008 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.example.zhouzhou.mynote.cube;
 
 import android.opengl.GLSurfaceView;
@@ -22,10 +6,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 
-/**
- * Example of how to use OpenGL|ES in a custom view
- *
- */
+//魔方渲染器
 class KubeRenderer implements GLSurfaceView.Renderer {
     public interface AnimationCallback {
         void animate();
@@ -42,19 +23,13 @@ class KubeRenderer implements GLSurfaceView.Renderer {
          }
 
         /*
-         * Usually, the first thing one might want to do is to clear
-         * the screen. The most efficient way of doing this is to use
-         * glClear(). However we must make sure to set the scissor
-         * correctly first. The scissor is always specified in window
-         * coordinates:
+         * 先清空屏幕
+         * glClear()
          */
 
         gl.glClearColor(0.5f,0.5f,0.5f,1);
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 
-        /*
-         * Now we're ready to draw some 3D object
-         */
 
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         gl.glLoadIdentity();
@@ -77,9 +52,7 @@ class KubeRenderer implements GLSurfaceView.Renderer {
         gl.glViewport(0, 0, width, height);
 
         /*
-         * Set our projection matrix. This doesn't have to be done
-         * each time we draw, but usually a new projection needs to be set
-         * when the viewport is resized.
+         * 设置矩阵
          */
 
         float ratio = (float)width / height;
@@ -87,17 +60,11 @@ class KubeRenderer implements GLSurfaceView.Renderer {
         gl.glLoadIdentity();
         gl.glFrustumf(-ratio, ratio, -1, 1, 2, 12);
 
-        /*
-         * By default, OpenGL enables features that improve quality
-         * but reduce performance. One might want to tweak that
-         * especially on software renderer.
-         */
         gl.glDisable(GL10.GL_DITHER);
         gl.glActiveTexture(GL10.GL_TEXTURE0);
     }
 
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        // Nothing special, don't have any textures we need to recreate.
     }
 
     public void setAngle(float angle) {

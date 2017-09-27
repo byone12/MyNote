@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2008 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.example.zhouzhou.mynote.cube;
 
 import java.nio.ShortBuffer;
@@ -54,7 +38,7 @@ public class GLShape {
 
 	public GLVertex addVertex(float x, float y, float z) {
 		
-		// look for an existing GLVertex first
+		// 现寻找一个现有的顶
 		Iterator<GLVertex> iter = mVertexList.iterator();
 		while (iter.hasNext()) {
 			GLVertex vertex = iter.next();
@@ -63,7 +47,7 @@ public class GLShape {
 			}
 		}
 		
-		// doesn't exist, so create new vertex
+		// 不存在时添加
 		GLVertex vertex = mWorld.addVertex(x, y, z);
 		mVertexList.add(vertex);
 		return vertex;
@@ -97,6 +81,6 @@ public class GLShape {
 	public M4						mAnimateTransform;
 	protected ArrayList<GLFace>		mFaceList = new ArrayList<GLFace>();
 	protected ArrayList<GLVertex>	mVertexList = new ArrayList<GLVertex>();
-	protected ArrayList<Integer>	mIndexList = new ArrayList<Integer>();	// make more efficient?
+	protected ArrayList<Integer>	mIndexList = new ArrayList<Integer>();
 	protected GLWorld mWorld;
 }

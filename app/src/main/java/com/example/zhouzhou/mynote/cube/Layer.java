@@ -1,25 +1,8 @@
-/*
- * Copyright (C) 2008 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.example.zhouzhou.mynote.cube;
 
 public class Layer {
 	
 	public Layer(int axis) {
-		// start with identity matrix for transformation
 		mAxis = axis;
 		mTransform.setIdentity();
 	}
@@ -43,12 +26,10 @@ public class Layer {
 	}
 	
 	public void setAngle(float angle) {
-		// normalize the angle
 		float twopi = (float)Math.PI *2f;
 		while (angle >= twopi) angle -= twopi;
 		while (angle < 0f) angle += twopi;
-//		mAngle = angle;
-		
+
 		float sin = (float)Math.sin(angle);
 		float cos = (float)Math.cos(angle);
 		
@@ -90,10 +71,7 @@ public class Layer {
 	
 	GLShape[] mShapes = new GLShape[9];
 	M4 mTransform = new M4();
-//	float mAngle;
 
-	// which axis do we rotate around?
-	// 0 for X, 1 for Y, 2 for Z
 	int mAxis;
 	static public final int kAxisX = 0;
 	static public final int kAxisY = 1;
